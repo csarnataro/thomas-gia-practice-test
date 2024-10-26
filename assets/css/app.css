@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+.vote_button {
+    @apply select-none bg-gradient-to-b from-[#4a6791] to-[#143369] mr-4 cursor-pointer p-8 bg-blue-800 text-white min-w-28 text-center;
+}
+
+.section-title {
+    @apply select-none text-white text-2xl text-center drop-shadow-xl mb-8
+}
