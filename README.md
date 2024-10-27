@@ -1,5 +1,13 @@
 # ThomasGIA
 
+An incomplete, non-official, practicing app for the Thomas GIA test. Written in Elixir + Phoenix 
+
+To learn more about the **Thomas GIA tests**, check the [official guide](https://www.thomas.co/sites/default/files/2019-08/) available on thomas.co site, and this [Reddit thread](https://www.reddit.com/r/Ubuntu/comments/14n8ehp/what_is_acceptable_level_to_pass_thomas_gia/)
+
+Inspired by the Python version available https://github.com/DanielM24/GIA-Practice-Tests
+
+
+## Development
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
