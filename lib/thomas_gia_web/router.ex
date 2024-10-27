@@ -17,7 +17,7 @@ defmodule ThomasGIAWeb.Router do
   scope "/", ThomasGIAWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", CounterPage
     live "/test", TestsPage
   end
 

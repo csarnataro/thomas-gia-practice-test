@@ -1,7 +1,7 @@
 defmodule ThomasGIAWeb.Perceptual do
   use ThomasGIAWeb, :live_component
 
-  def show(assigns) do
+  def render(assigns) do
     ~H"""
     <div>
       <h1 class="section-title">Section 2 - Perceptual Speed</h1>
@@ -9,7 +9,7 @@ defmodule ThomasGIAWeb.Perceptual do
         <article class="mb-4 flex justify-center">
           <span
             :for={letter <- @test.question.upper_row}
-            class="mr-3 block w-12 text-4xl font-bold text-neutral-800 dark:text-neutral-200"
+            class="mr-3 block w-12 text-4xl font-bold text-gray-800"
           >
             <%= letter %>
           </span>
@@ -17,7 +17,7 @@ defmodule ThomasGIAWeb.Perceptual do
         <article class="mb-4 flex justify-center">
           <span
             :for={letter <- @test.question.lower_row}
-            class="mr-3 block w-12 text-4xl font-bold text-neutral-800 dark:text-neutral-200"
+            class="mr-3 block w-12 text-4xl font-bold text-gray-800"
           >
             <%= letter %>
           </span>

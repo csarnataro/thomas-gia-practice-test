@@ -8,6 +8,8 @@ defmodule ThomasGIA.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      ThomasGia.CounterState,
+      ThomasGia.TestProgress,
       ThomasGIAWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:thomas_gia, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ThomasGIA.PubSub},

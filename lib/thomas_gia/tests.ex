@@ -6,6 +6,8 @@ defmodule ThomasGia.Tests do
 
   require Logger
 
+  @picture_angles [{0, 0}, {0, 90}, {0, 180}, {0, 270}, {1, 0}, {1, 90}, {1, 180}, {1, 270}]
+
   def build_reasoning_test do
     [person_1, person_2] = Enum.take_random(Reasoning.get_people(), 2)
     adjective = Enum.random(Reasoning.get_adjectives())
@@ -81,7 +83,7 @@ defmodule ThomasGia.Tests do
         # :lower => lower,
         # :medium => medium,
         # :higher => higher,
-        answer: answer
+        answer: Integer.to_string(answer)
       }
     else
       build_arithmetic_test()
@@ -179,27 +181,92 @@ defmodule ThomasGia.Tests do
         upper_row: Enum.at(capitalized_rows, 0),
         lower_row: Enum.at(capitalized_rows, 1)
       },
-      answer: test.answer
+      answer: Integer.to_string(test.answer)
     }
   end
 
-  def get_test(:number) do
-    build_arithmetic_test()
+  def build_spatial_test do
+    chars = ["R", "N", "S", "F", "P", "G"]
+
+    random_chars = Enum.take_random(chars, 2)
+    answer = :rand.uniform(3) - 1
+
+    pairs =
+      case :rand.uniform(3) - 1 do
+        1 ->
+          [
+            get_matching_pair(),
+            get_non_matching_pair()
+          ]
+
+        _ ->
+          [
+            get_matching_pair(),
+            get_matching_pair()
+          ]
+      end
+
+    %{
+      pairs: pairs,
+      chars: random_chars,
+      answer: Integer.to_string(answer)
+    }
   end
 
-  def get_test(:word) do
-    build_words_test()
+  def get_non_matching_pair() do
+    pair = Enum.take_random(@picture_angles, 2)
+
+    if elem(Enum.at(pair, 0), 0) != elem(Enum.at(pair, 1), 0) do
+      pair
+    else
+      get_non_matching_pair()
+    end
   end
 
-  def get_test(:perceptual) do
-    build_cognitive_test()
+  def get_matching_pair() do
+    pair = Enum.take_random(@picture_angles, 2)
+
+    if elem(Enum.at(pair, 0), 0) == elem(Enum.at(pair, 1), 0) &&
+         Enum.at(pair, 0) != Enum.at(pair, 1) do
+      pair
+    else
+      get_matching_pair()
+    end
   end
 
-  def get_test(:reasoning) do
-    build_reasoning_test()
-  end
+  # def get_non_matching_r(self):
+  #       while True:
+  #           pair = sample(self.picture_angles, 2)
+  #           if pair[0][0] != pair[1][0]:
+  #               return pair
+
+  #   def get_matching_r(self):
+  #       while True:
+  #           pair = sample(self.picture_angles, 2)
+  #           if pair[0][0] == pair[1][0] and pair[0] != pair[1]:
+  #               return pair
 
   def get_test(other) do
     raise("No test found [#{other}] !")
+  end
+
+  def get_tests(:reasoning, how_many) do
+    Enum.map(1..how_many, fn _i -> build_reasoning_test() end)
+  end
+
+  def get_tests(:number, how_many) do
+    Enum.map(1..how_many, fn _i -> build_arithmetic_test() end)
+  end
+
+  def get_tests(:perceptual, how_many) do
+    Enum.map(1..how_many, fn _i -> build_cognitive_test() end)
+  end
+
+  def get_tests(:word, how_many) do
+    Enum.map(1..how_many, fn _i -> build_words_test() end)
+  end
+
+  def get_tests(:spatial, how_many) do
+    Enum.map(1..how_many, fn _i -> build_spatial_test() end)
   end
 end

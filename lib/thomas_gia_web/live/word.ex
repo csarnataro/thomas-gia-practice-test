@@ -1,7 +1,7 @@
 defmodule ThomasGIAWeb.Word do
   use ThomasGIAWeb, :live_component
 
-  def show(assigns) do
+  def render(assigns) do
     ~H"""
     <div>
       <h1 class="section-title">Section 4 - Word Meaning</h1>
